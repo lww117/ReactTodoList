@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--<script type="text/jsx" src="weather.jsx"></script>-->
+</head>
+<body>
+    <div id="example"></div>
+<!--    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/react/JSXTransformer.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/requests/request.js"></script>
+    <script type="text/jsx" src="weather.jsx"></script>-->
+    <script src="http://static.runoob.com/assets/react/react-0.14.7/build/react.js"></script>
+    <script src="http://static.runoob.com/assets/react/react-0.14.7/build/react-dom.js"></script>
+    <script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="bower_components/requests/request.js"></script>
+    <script type="text/babel">
+        var Weather = React.createClass({
+            getInitialState: function() {
+                return {
+                    retData: ''
+                };
+            },
+
+            componentDidMount: function() {
+                this.serverRequest = request.get(this.props.source, this.props.headers, function(result) {
+                    this.setState({
+                        retData: result
+                    });
+                }.bind(this));
+            },
+
+            render: function() {
+                return (
+                        <div>
+                            {this.state.retData}天气
+                        </div>
+                );
+            }
+        });
+        ReactDOM.render(
+                <Weather source="http://apis.baidu.com/apistore/weatherservice/recentweathers?cityname=%E5%8C%97%E4%BA%AC&cityid=101010100" headers={{'apikey':'30100ae48a00ef8052a29ef3ad484296'}}/>,
+                document.getElementById('example')
+        );
+    </script>
+</body>
+</html>
